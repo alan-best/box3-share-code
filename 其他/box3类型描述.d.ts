@@ -120,22 +120,22 @@ declare class Box3Zone {
      * @ignore
      */
     constructor(
-        /**
-         * List all entities
-         */
-        entities: () => Box3Entity[],
-        /**
-         * Triggered when an entity enters the zone
-         */
-        onEnter: Box3EventChannel<Box3TriggerEvent>, nextEnter: Box3EventFuture<Box3TriggerEvent>,
-        /**
-         * Triggers when an entity leaves the zone
-         */
-        onLeave: Box3EventChannel<Box3TriggerEvent>, nextLeave: Box3EventFuture<Box3TriggerEvent>,
-        /**
-         * Destroys the zone
-         */
-        remove: () => void);
+    /**
+     * List all entities
+     */
+    entities: () => Box3Entity[], 
+    /**
+     * Triggered when an entity enters the zone
+     */
+    onEnter: Box3EventChannel<Box3TriggerEvent>, nextEnter: Box3EventFuture<Box3TriggerEvent>, 
+    /**
+     * Triggers when an entity leaves the zone
+     */
+    onLeave: Box3EventChannel<Box3TriggerEvent>, nextLeave: Box3EventFuture<Box3TriggerEvent>, 
+    /**
+     * Destroys the zone
+     */
+    remove: () => void);
 }
 /**
  * Trigger constructor parameters
@@ -600,207 +600,207 @@ declare class Box3World {
      * @ignore
      */
     constructor(
-        /**
-         * Public URL of the currently running world
-         */
-        url: URL,
-        /**
-         * Returns the remaining number of entities the script is allowed to create
-         * @category entities
-         */
-        entityQuota: () => number,
-        /**
-         * @category health
-         */
-        onRespawn: Box3EventChannel<Box3RespawnEvent>, nextRespawn: Box3EventFuture<Box3RespawnEvent>,
-        /**
-         * Creates a new {@link Box3.Box3Entity} or makes a copy of an existing entity.
-         * If entity quota is exceeded, then returns null.
-         * @param config A set of initial values for the entity or a new entity which we want to copy
-         * @returns A newly created entity with the given parameters
-         * @category entity
-         */
-        createEntity: (config: Partial<Box3EntityConfig>) => Box3Entity | null,
-        /**
-         * The entities in box3 can be searched using a jQuery selector-like syntax.
-         * For more examples see {@link Box3.Box3SelectorString}
-         *
-         * @param selector a selector search pattern
-         * @returns the first entity which matches the selector/
-         * @category entity
-         */
-        querySelector: (selector: Box3SelectorString) => Box3Entity | null,
-        /**
-         * The entities in box3 can be searched using a jQuery selector-like syntax
-         * For more examples see {@link Box3.Box3SelectorString}
-         *
-         * @param selector a selector search pattern
-         * @returns All entities which match the selector
-         * @category entity
-         */
-        querySelectorAll: (selector: Box3SelectorString) => Box3Entity[],
-        /**
-         * Test a selector on an entity
-         *
-         * @param selector the selector pattern to test
-         * @param entity The entity to test
-         * @category entity
-         */
-        testSelector: (selector: Box3SelectorString, entity: Box3Entity) => boolean,
-        /**
-         * Disables collisions between the set of all entities matching aSelector and bSelector
-         *
-         * @param aSelector the selector for the first set of entities
-         * @param bSelector the selector for the second set of entities
-         * @category physics
-         */
-        addCollisionFilter: (aSelector: Box3SelectorString, bSelector: Box3SelectorString) => void,
-        /**
-         * Removes collision filter between aSelector and bSelector
-         *
-         * @param aSelector the selector for the first set of entities
-         * @param bSelector the selector for the second set of entities
-         * @category physics
-         */
-        removeCollisionFilter: (aSelector: Box3SelectorString, bSelector: Box3SelectorString) => void,
-        /**
-         * Clears all collision filters
-         *
-         * @category physics
-         */
-        clearCollisionFilters: () => void,
-        /**
-         * Returns a list of all currently active collision filters
-         *
-         * @returns All currently active collision filters
-         * @category physics
-         */
-        collisionFilters: () => string[][],
-        /**
-         * Shoots a ray through the world from `origin` in `direction`
-         * @param origin the start point of the ray
-         * @param direction the direction of the ray
-         * @param options An option configuration parameter
-         * @returns Information about the resulting raycast
-         * @category search
-         */
-        raycast: (origin: Box3Vector3, direction: Box3Vector3, options?: Partial<Box3RaycastOptions>) => Box3RaycastResult,
-        /**
-         * Search for all entities contained in a bounding box
-         * @param bounds the bounding box to search
-         * @returns All entities contained in ``bounds``
-         */
-        searchBox: (bounds: Box3Bounds3) => Box3Entity[],
-        /**
-         * An event handler called each tick
-         * @category tick
-         */
-        onTick: Box3EventChannel<Box3TickEvent>, nextTick: Box3EventFuture<Box3TickEvent>,
-        /**
-         * Called when an entity takes damage
-         * @category health
-         */
-        onTakeDamage: Box3EventChannel<Box3DamageEvent>, nextTakeDamage: Box3EventFuture<Box3DamageEvent>,
-        /**
-         * Called when an entity dies
-         * @category health
-         */
-        onDie: Box3EventChannel<Box3DieEvent>, nextDie: Box3EventFuture<Box3DieEvent>,
-        /**
-         * Called whenever a player joins the game
-         * @category player
-         */
-        onPlayerJoin: Box3EventChannel<Box3PlayerEntityEvent>, nextPlayerJoin: Box3EventFuture<Box3PlayerEntityEvent>,
-        /**
-         * Called whenever a player leaves the game
-         * @category player
-         */
-        onPlayerLeave: Box3EventChannel<Box3PlayerEntityEvent>, nextPlayerLeave: Box3EventFuture<Box3PlayerEntityEvent>,
-        /**
-         * Called whenever an entity is created
-         * @category entity
-         */
-        onEntityCreate: Box3EventChannel<Box3EntityEvent>, nextEntityCreate: Box3EventFuture<Box3EntityEvent>,
-        /**
-         * Called whenever an entity is destroyed
-         * @category chat
-         */
-        onEntityDestroy: Box3EventChannel<Box3EntityEvent>, nextEntityDestroy: Box3EventFuture<Box3EntityEvent>,
-        /**
-         * Broadcast a global message to all players
-         * @param message is some text we want to broadcast
-         * @category player
-         */
-        say: (message: string) => void,
-        /**
-         * Called whenever a player says something
-         * @category player
-         */
-        onChat: Box3EventChannel<Box3ChatEvent>, nextChat: Box3EventFuture<Box3ChatEvent>,
-        /**
-         * Called whenever a player clicks on an object
-         * @category player
-         */
-        onClick: Box3EventChannel<Box3ClickEvent>, nextClick: Box3EventFuture<Box3ClickEvent>,
-        /**
-         * Called whenever a player pushes a button
-         * @category player
-         */
-        onPress: Box3EventChannel<Box3InputEvent>, nextPress: Box3EventFuture<Box3InputEvent>,
-        /**
-         * Called whenever a player releases a button
-         * @category player
-         */
-        onRelease: Box3EventChannel<Box3InputEvent>, nextRelease: Box3EventFuture<Box3InputEvent>,
-        /**
-         * Called whenever two entities collide
-         * @category entity
-         */
-        onEntityContact: Box3EventChannel<Box3EntityContactEvent>, nextEntityContact: Box3EventFuture<Box3EntityContactEvent>,
-        /**
-         * Called whenever two entities stop colliding
-         * @category entity
-         */
-        onEntitySeparate: Box3EventChannel<Box3EntityContactEvent>, nextEntitySeparate: Box3EventFuture<Box3EntityContactEvent>,
-        /**
-         * Called whenever an entity touches a voxel
-         * @category entity
-         */
-        onVoxelContact: Box3EventChannel<Box3VoxelContactEvent>, nextVoxelContact: Box3EventFuture<Box3VoxelContactEvent>,
-        /**
-         * Called whenever an entity stops touching a voxel
-         * @category entity
-         */
-        onVoxelSeparate: Box3EventChannel<Box3VoxelContactEvent>, nextVoxelSeparate: Box3EventFuture<Box3VoxelContactEvent>,
-        /**
-         * Called when an entity enters a fluid
-         * @category entity
-         */
-        onFluidEnter: Box3EventChannel<Box3FluidContactEvent>, nextFluidEnter: Box3EventFuture<Box3FluidContactEvent>,
-        /**
-         * Called when an entity leaves a fluid
-         * @category entity
-         */
-        onFluidLeave: Box3EventChannel<Box3FluidContactEvent>, nextFluidLeave: Box3EventFuture<Box3FluidContactEvent>,
-        /**
-         * Zones
-         * @category zone
-         */
-        zones: () => Box3Zone[], addZone: (config: Partial<Box3ZoneConfig>) => Box3Zone, removeZone: (trigger: Box3Zone) => void,
-        /**
-         * @category interactive
-         */
-        onInteract: Box3EventChannel<Box3InteractEvent>, nextInteract: Box3EventFuture<Box3InteractEvent>,
-        /**
-         * Plays a sound at a given location
-         */
-        sound: (spec: {
-            sample: string;
-            position?: Box3Vector3;
-            radius?: number;
-            gain?: number;
-            pitch?: number;
-        } | string) => void);
+    /**
+     * Public URL of the currently running world
+     */
+    url: URL, 
+    /**
+     * Returns the remaining number of entities the script is allowed to create
+     * @category entities
+     */
+    entityQuota: () => number, 
+    /**
+     * @category health
+     */
+    onRespawn: Box3EventChannel<Box3RespawnEvent>, nextRespawn: Box3EventFuture<Box3RespawnEvent>, 
+    /**
+     * Creates a new {@link Box3.Box3Entity} or makes a copy of an existing entity.
+     * If entity quota is exceeded, then returns null.
+     * @param config A set of initial values for the entity or a new entity which we want to copy
+     * @returns A newly created entity with the given parameters
+     * @category entity
+     */
+    createEntity: (config: Partial<Box3EntityConfig>) => Box3Entity | null, 
+    /**
+     * The entities in box3 can be searched using a jQuery selector-like syntax.
+     * For more examples see {@link Box3.Box3SelectorString}
+     *
+     * @param selector a selector search pattern
+     * @returns the first entity which matches the selector/
+     * @category entity
+     */
+    querySelector: (selector: Box3SelectorString) => Box3Entity | null, 
+    /**
+     * The entities in box3 can be searched using a jQuery selector-like syntax
+     * For more examples see {@link Box3.Box3SelectorString}
+     *
+     * @param selector a selector search pattern
+     * @returns All entities which match the selector
+     * @category entity
+     */
+    querySelectorAll: (selector: Box3SelectorString) => Box3Entity[], 
+    /**
+     * Test a selector on an entity
+     *
+     * @param selector the selector pattern to test
+     * @param entity The entity to test
+     * @category entity
+     */
+    testSelector: (selector: Box3SelectorString, entity: Box3Entity) => boolean, 
+    /**
+     * Disables collisions between the set of all entities matching aSelector and bSelector
+     *
+     * @param aSelector the selector for the first set of entities
+     * @param bSelector the selector for the second set of entities
+     * @category physics
+     */
+    addCollisionFilter: (aSelector: Box3SelectorString, bSelector: Box3SelectorString) => void, 
+    /**
+     * Removes collision filter between aSelector and bSelector
+     *
+     * @param aSelector the selector for the first set of entities
+     * @param bSelector the selector for the second set of entities
+     * @category physics
+     */
+    removeCollisionFilter: (aSelector: Box3SelectorString, bSelector: Box3SelectorString) => void, 
+    /**
+     * Clears all collision filters
+     *
+     * @category physics
+     */
+    clearCollisionFilters: () => void, 
+    /**
+     * Returns a list of all currently active collision filters
+     *
+     * @returns All currently active collision filters
+     * @category physics
+     */
+    collisionFilters: () => string[][], 
+    /**
+     * Shoots a ray through the world from `origin` in `direction`
+     * @param origin the start point of the ray
+     * @param direction the direction of the ray
+     * @param options An option configuration parameter
+     * @returns Information about the resulting raycast
+     * @category search
+     */
+    raycast: (origin: Box3Vector3, direction: Box3Vector3, options?: Partial<Box3RaycastOptions>) => Box3RaycastResult, 
+    /**
+     * Search for all entities contained in a bounding box
+     * @param bounds the bounding box to search
+     * @returns All entities contained in ``bounds``
+     */
+    searchBox: (bounds: Box3Bounds3) => Box3Entity[], 
+    /**
+     * An event handler called each tick
+     * @category tick
+     */
+    onTick: Box3EventChannel<Box3TickEvent>, nextTick: Box3EventFuture<Box3TickEvent>, 
+    /**
+     * Called when an entity takes damage
+     * @category health
+     */
+    onTakeDamage: Box3EventChannel<Box3DamageEvent>, nextTakeDamage: Box3EventFuture<Box3DamageEvent>, 
+    /**
+     * Called when an entity dies
+     * @category health
+     */
+    onDie: Box3EventChannel<Box3DieEvent>, nextDie: Box3EventFuture<Box3DieEvent>, 
+    /**
+     * Called whenever a player joins the game
+     * @category player
+     */
+    onPlayerJoin: Box3EventChannel<Box3PlayerEntityEvent>, nextPlayerJoin: Box3EventFuture<Box3PlayerEntityEvent>, 
+    /**
+     * Called whenever a player leaves the game
+     * @category player
+     */
+    onPlayerLeave: Box3EventChannel<Box3PlayerEntityEvent>, nextPlayerLeave: Box3EventFuture<Box3PlayerEntityEvent>, 
+    /**
+     * Called whenever an entity is created
+     * @category entity
+     */
+    onEntityCreate: Box3EventChannel<Box3EntityEvent>, nextEntityCreate: Box3EventFuture<Box3EntityEvent>, 
+    /**
+     * Called whenever an entity is destroyed
+     * @category chat
+     */
+    onEntityDestroy: Box3EventChannel<Box3EntityEvent>, nextEntityDestroy: Box3EventFuture<Box3EntityEvent>, 
+    /**
+     * Broadcast a global message to all players
+     * @param message is some text we want to broadcast
+     * @category player
+     */
+    say: (message: string) => void, 
+    /**
+     * Called whenever a player says something
+     * @category player
+     */
+    onChat: Box3EventChannel<Box3ChatEvent>, nextChat: Box3EventFuture<Box3ChatEvent>, 
+    /**
+     * Called whenever a player clicks on an object
+     * @category player
+     */
+    onClick: Box3EventChannel<Box3ClickEvent>, nextClick: Box3EventFuture<Box3ClickEvent>, 
+    /**
+     * Called whenever a player pushes a button
+     * @category player
+     */
+    onPress: Box3EventChannel<Box3InputEvent>, nextPress: Box3EventFuture<Box3InputEvent>, 
+    /**
+     * Called whenever a player releases a button
+     * @category player
+     */
+    onRelease: Box3EventChannel<Box3InputEvent>, nextRelease: Box3EventFuture<Box3InputEvent>, 
+    /**
+     * Called whenever two entities collide
+     * @category entity
+     */
+    onEntityContact: Box3EventChannel<Box3EntityContactEvent>, nextEntityContact: Box3EventFuture<Box3EntityContactEvent>, 
+    /**
+     * Called whenever two entities stop colliding
+     * @category entity
+     */
+    onEntitySeparate: Box3EventChannel<Box3EntityContactEvent>, nextEntitySeparate: Box3EventFuture<Box3EntityContactEvent>, 
+    /**
+     * Called whenever an entity touches a voxel
+     * @category entity
+     */
+    onVoxelContact: Box3EventChannel<Box3VoxelContactEvent>, nextVoxelContact: Box3EventFuture<Box3VoxelContactEvent>, 
+    /**
+     * Called whenever an entity stops touching a voxel
+     * @category entity
+     */
+    onVoxelSeparate: Box3EventChannel<Box3VoxelContactEvent>, nextVoxelSeparate: Box3EventFuture<Box3VoxelContactEvent>, 
+    /**
+     * Called when an entity enters a fluid
+     * @category entity
+     */
+    onFluidEnter: Box3EventChannel<Box3FluidContactEvent>, nextFluidEnter: Box3EventFuture<Box3FluidContactEvent>, 
+    /**
+     * Called when an entity leaves a fluid
+     * @category entity
+     */
+    onFluidLeave: Box3EventChannel<Box3FluidContactEvent>, nextFluidLeave: Box3EventFuture<Box3FluidContactEvent>, 
+    /**
+     * Zones
+     * @category zone
+     */
+    zones: () => Box3Zone[], addZone: (config: Partial<Box3ZoneConfig>) => Box3Zone, removeZone: (trigger: Box3Zone) => void, 
+    /**
+     * @category interactive
+     */
+    onInteract: Box3EventChannel<Box3InteractEvent>, nextInteract: Box3EventFuture<Box3InteractEvent>, 
+    /**
+     * Plays a sound at a given location
+     */
+    sound: (spec: {
+        sample: string;
+        position?: Box3Vector3;
+        radius?: number;
+        gain?: number;
+        pitch?: number;
+    } | string) => void);
 }
 /**
  * {@link Box3.Box3Voxels} gives an interface for all the voxels in Box3.  You can use it to control the terrain
@@ -858,54 +858,54 @@ declare class Box3Voxels {
      * @ignore
      */
     constructor(
-        /**
-         * Size of the voxel grid along the x/y/z dimensions
-         */
-        shape: Box3Vector3,
-        /**
-         * An array of all supported voxel types
-         * @category names
-         */
-        VoxelTypes: string[],
-        /**
-         * @param name the human readable name for the voxel
-         * @returns the voxel id number
-         * @category names
-         */
-        id: (name: string) => number,
-        /**
-         * @param id the numerical id of a voxel
-         * @returns the human readable voxel name
-         * @category names
-         */
-        name: (id: number) => string,
-        /**
-         * Sets a voxel in the grid
-         * @param voxel The name of the voxel or its voxel id
-         * @param rotation The rotation code of the voxel
-         * @returns the id of the updated voxel
-         */
-        setVoxel: (x: number, y: number, z: number, voxel: number | string, rotation?: number | string) => number,
-        /**
-         * Get the type of a voxel at some point
-         * @returns the voxel type code at point x/y/z
-         */
-        getVoxel: (x: number, y: number, z: number) => number,
-        /**
-         * Get the rotation of a voxel at point x/y/z
-         * @returns the voxel rotation code
-         */
-        getVoxelRotation: (x: number, y: number, z: number) => number,
-        /**
-         * Sets a voxel in the grid directly using its id code
-         * @category advanced
-         */
-        setVoxelId: (x: number, y: number, z: number, voxel: number) => number,
-        /**
-         * Retrieves the voxel id in the grid
-         * @category advanced
-         */
-        getVoxelId: (x: number, y: number, z: number) => number);
+    /**
+     * Size of the voxel grid along the x/y/z dimensions
+     */
+    shape: Box3Vector3, 
+    /**
+     * An array of all supported voxel types
+     * @category names
+     */
+    VoxelTypes: string[], 
+    /**
+     * @param name the human readable name for the voxel
+     * @returns the voxel id number
+     * @category names
+     */
+    id: (name: string) => number, 
+    /**
+     * @param id the numerical id of a voxel
+     * @returns the human readable voxel name
+     * @category names
+     */
+    name: (id: number) => string, 
+    /**
+     * Sets a voxel in the grid
+     * @param voxel The name of the voxel or its voxel id
+     * @param rotation The rotation code of the voxel
+     * @returns the id of the updated voxel
+     */
+    setVoxel: (x: number, y: number, z: number, voxel: number | string, rotation?: number | string) => number, 
+    /**
+     * Get the type of a voxel at some point
+     * @returns the voxel type code at point x/y/z
+     */
+    getVoxel: (x: number, y: number, z: number) => number, 
+    /**
+     * Get the rotation of a voxel at point x/y/z
+     * @returns the voxel rotation code
+     */
+    getVoxelRotation: (x: number, y: number, z: number) => number, 
+    /**
+     * Sets a voxel in the grid directly using its id code
+     * @category advanced
+     */
+    setVoxelId: (x: number, y: number, z: number, voxel: number) => number, 
+    /**
+     * Retrieves the voxel id in the grid
+     * @category advanced
+     */
+    getVoxelId: (x: number, y: number, z: number) => number);
 }
 declare type Box3PlayerEntity = Box3Entity & {
     player: Box3Player;
@@ -1346,105 +1346,105 @@ declare class Box3Entity implements Box3EntityConfig {
      * @ignore
      */
     constructor(
-        /**
-         * Set of all tags assigned to the entity in the editor
-         * @category selectors
-         */
-        tags: () => string[],
-        /**
-         * Adds a new tag to the entity
-         * @category selectors
-         */
-        addTag: (tag: string) => void,
-        /**
-         * Removes a tag from the entity
-         * @category selectors
-         */
-        removeTag: (tag: string) => void,
-        /**
-         * Tests if an entity has a tag
-         * @category selectors
-         */
-        hasTag: (tag: string) => boolean,
-        /**
-         * Destroys the entity
-         * @category destroy
-         */
-        destroy: () => void,
-        /**
-         * Called when the entity is destroyed
-         * @category destroy
-         */
-        onDestroy: Box3EventChannel<Box3EntityEvent>, nextDestroy: Box3EventFuture<Box3EntityEvent>,
-        /**
-         * Called when entity takes damage
-         * @category health
-         */
-        onTakeDamage: Box3EventChannel<Box3DamageEvent>, nextTakeDamage: Box3EventFuture<Box3DamageEvent>,
-        /**
-         * Called when an entity dies
-         * @category health
-         */
-        onDie: Box3EventChannel<Box3DieEvent>, nextDie: Box3EventFuture<Box3DieEvent>,
-        /**
-         * Deals damage to an entity
-         * @category health
-         */
-        hurt: (amount: number, options?: Partial<Box3HurtOptions>) => void,
-        /**
-         * Makes the entity talk
-         * @category chat
-         */
-        say: (message: string) => void,
-        /**
-         * Called whenever a player clicks on this entity
-         */
-        onClick: Box3EventChannel<Box3ClickEvent>, nextClick: Box3EventFuture<Box3ClickEvent>,
-        /**
-         * Called when the entity touches another entity
-         * @category physics
-         */
-        onEntityContact: Box3EventChannel<Box3EntityContactEvent>, nextEntityContact: Box3EventFuture<Box3EntityContactEvent>,
-        /**
-         * Called when the entity stops touching another entity
-         * @category physics
-         */
-        onEntitySeparate: Box3EventChannel<Box3EntityContactEvent>, nextEntitySeparate: Box3EventFuture<Box3EntityContactEvent>,
-        /**
-         * Called when the entity touches a voxel
-         * @category physics
-         */
-        onVoxelContact: Box3EventChannel<Box3VoxelContactEvent>, nextVoxelContact: Box3EventFuture<Box3VoxelContactEvent>,
-        /**
-         * Called when the entity stops touching a voxel
-         * @category physics
-         */
-        onVoxelSeparate: Box3EventChannel<Box3VoxelContactEvent>, nextVoxelSeparate: Box3EventFuture<Box3VoxelContactEvent>,
-        /**
-         * Called when the entity enters a fluid
-         * @category physics
-         */
-        onFluidEnter: Box3EventChannel<Box3FluidContactEvent>, nextFluidEnter: Box3EventFuture<Box3FluidContactEvent>,
-        /**
-         * Called when the entity leaves a fluid
-         * @category physics
-         */
-        onFluidLeave: Box3EventChannel<Box3FluidContactEvent>, nextFluidLeave: Box3EventFuture<Box3FluidContactEvent>,
-        /**
-         * Called when an entity interact with another entity
-         * @category interactive
-         */
-        onInteract: Box3EventChannel<Box3InteractEvent>, nextInteract: Box3EventFuture<Box3InteractEvent>,
-        /**
-         * Play a sound effect at the location of this entity
-         * @category sound
-         */
-        sound: (spec: {
-            sample: string;
-            radius?: number;
-            pitch?: number;
-            gain?: number;
-        } | string) => void);
+    /**
+     * Set of all tags assigned to the entity in the editor
+     * @category selectors
+     */
+    tags: () => string[], 
+    /**
+     * Adds a new tag to the entity
+     * @category selectors
+     */
+    addTag: (tag: string) => void, 
+    /**
+     * Removes a tag from the entity
+     * @category selectors
+     */
+    removeTag: (tag: string) => void, 
+    /**
+     * Tests if an entity has a tag
+     * @category selectors
+     */
+    hasTag: (tag: string) => boolean, 
+    /**
+     * Destroys the entity
+     * @category destroy
+     */
+    destroy: () => void, 
+    /**
+     * Called when the entity is destroyed
+     * @category destroy
+     */
+    onDestroy: Box3EventChannel<Box3EntityEvent>, nextDestroy: Box3EventFuture<Box3EntityEvent>, 
+    /**
+     * Called when entity takes damage
+     * @category health
+     */
+    onTakeDamage: Box3EventChannel<Box3DamageEvent>, nextTakeDamage: Box3EventFuture<Box3DamageEvent>, 
+    /**
+     * Called when an entity dies
+     * @category health
+     */
+    onDie: Box3EventChannel<Box3DieEvent>, nextDie: Box3EventFuture<Box3DieEvent>, 
+    /**
+     * Deals damage to an entity
+     * @category health
+     */
+    hurt: (amount: number, options?: Partial<Box3HurtOptions>) => void, 
+    /**
+     * Makes the entity talk
+     * @category chat
+     */
+    say: (message: string) => void, 
+    /**
+     * Called whenever a player clicks on this entity
+     */
+    onClick: Box3EventChannel<Box3ClickEvent>, nextClick: Box3EventFuture<Box3ClickEvent>, 
+    /**
+     * Called when the entity touches another entity
+     * @category physics
+     */
+    onEntityContact: Box3EventChannel<Box3EntityContactEvent>, nextEntityContact: Box3EventFuture<Box3EntityContactEvent>, 
+    /**
+     * Called when the entity stops touching another entity
+     * @category physics
+     */
+    onEntitySeparate: Box3EventChannel<Box3EntityContactEvent>, nextEntitySeparate: Box3EventFuture<Box3EntityContactEvent>, 
+    /**
+     * Called when the entity touches a voxel
+     * @category physics
+     */
+    onVoxelContact: Box3EventChannel<Box3VoxelContactEvent>, nextVoxelContact: Box3EventFuture<Box3VoxelContactEvent>, 
+    /**
+     * Called when the entity stops touching a voxel
+     * @category physics
+     */
+    onVoxelSeparate: Box3EventChannel<Box3VoxelContactEvent>, nextVoxelSeparate: Box3EventFuture<Box3VoxelContactEvent>, 
+    /**
+     * Called when the entity enters a fluid
+     * @category physics
+     */
+    onFluidEnter: Box3EventChannel<Box3FluidContactEvent>, nextFluidEnter: Box3EventFuture<Box3FluidContactEvent>, 
+    /**
+     * Called when the entity leaves a fluid
+     * @category physics
+     */
+    onFluidLeave: Box3EventChannel<Box3FluidContactEvent>, nextFluidLeave: Box3EventFuture<Box3FluidContactEvent>, 
+    /**
+     * Called when an entity interact with another entity
+     * @category interactive
+     */
+    onInteract: Box3EventChannel<Box3InteractEvent>, nextInteract: Box3EventFuture<Box3InteractEvent>, 
+    /**
+     * Play a sound effect at the location of this entity
+     * @category sound
+     */
+    sound: (spec: {
+        sample: string;
+        radius?: number;
+        pitch?: number;
+        gain?: number;
+    } | string) => void);
 }
 /**
  * An active entity pair contact
@@ -1479,41 +1479,41 @@ declare class Box3FluidContact {
  * Player movement state
  */
 declare enum Box3PlayerMoveState {
-    FLYING = "fly",
-    GROUND = "ground",
-    SWIM = "swim",
-    FALL = "fall",
-    JUMP = "jump",
-    DOUBLE_JUMP = "jump2"
+    FLYING = \"fly\",
+    GROUND = \"ground\",
+    SWIM = \"swim\",
+    FALL = \"fall\",
+    JUMP = \"jump\",
+    DOUBLE_JUMP = \"jump2\"
 }
 /**
  * Player walking state
  */
 declare enum Box3PlayerWalkState {
-    NONE = "",
-    CROUCH = "crouch",
-    WALK = "walk",
-    RUN = "run"
+    NONE = \"\",
+    CROUCH = \"crouch\",
+    WALK = \"walk\",
+    RUN = \"run\"
 }
 declare enum Box3BodyPart {
-    HIPS = "hips",
-    TORSO = "torso",
-    NECK = "neck",
-    HEAD = "head",
-    LEFT_SHOULDER = "leftShoulder",
-    LEFT_UPPER_ARM = "leftUpperArm",
-    LEFT_LOWER_ARM = "leftLowerArm",
-    LEFT_HAND = "leftHand",
-    LEFT_UPPER_LEG = "leftUpperLeg",
-    LEFT_LOWER_LEG = "leftLowerLeg",
-    LEFT_FOOT = "leftFoot",
-    RIGHT_SHOULDER = "rightShoulder",
-    RIGHT_UPPER_ARM = "rightUpperArm",
-    RIGHT_LOWER_ARM = "rightLowerArm",
-    RIGHT_HAND = "rightHand",
-    RIGHT_UPPER_LEG = "rightUpperLeg",
-    RIGHT_LOWER_LEG = "rightLowerLeg",
-    RIGHT_FOOT = "rightFoot"
+    HIPS = \"hips\",
+    TORSO = \"torso\",
+    NECK = \"neck\",
+    HEAD = \"head\",
+    LEFT_SHOULDER = \"leftShoulder\",
+    LEFT_UPPER_ARM = \"leftUpperArm\",
+    LEFT_LOWER_ARM = \"leftLowerArm\",
+    LEFT_HAND = \"leftHand\",
+    LEFT_UPPER_LEG = \"leftUpperLeg\",
+    LEFT_LOWER_LEG = \"leftLowerLeg\",
+    LEFT_FOOT = \"leftFoot\",
+    RIGHT_SHOULDER = \"rightShoulder\",
+    RIGHT_UPPER_ARM = \"rightUpperArm\",
+    RIGHT_LOWER_ARM = \"rightLowerArm\",
+    RIGHT_HAND = \"rightHand\",
+    RIGHT_UPPER_LEG = \"rightUpperLeg\",
+    RIGHT_LOWER_LEG = \"rightLowerLeg\",
+    RIGHT_FOOT = \"rightFoot\"
 }
 interface Box3WearableSpec {
     bodyPart: Box3BodyPart;
@@ -1573,9 +1573,9 @@ declare class Box3Wearable implements Box3WearableSpec {
  * Dialog stuff
  */
 declare enum Box3DialogType {
-    TEXT = "text",
-    SELECT = "select",
-    INPUT = "input"
+    TEXT = \"text\",
+    SELECT = \"select\",
+    INPUT = \"input\"
 }
 declare type Box3DialogSelectResponse = {
     index: number;
@@ -1956,9 +1956,9 @@ declare class Box3Player {
     colorLUT: string;
     /**
      * Camera behavior mode.
-     *  + `"FPS"` - First person camera
-     *  + `"FOLLOW"` - Third person follow camera (default)
-     *  + `"FIXED"` - Third person fixed camera
+     *  + `\"FPS\"` - First person camera
+     *  + `\"FOLLOW\"` - Third person follow camera (default)
+     *  + `\"FIXED\"` - Third person fixed camera
      * @category camera
      */
     cameraMode: 'FOLLOW' | 'FPS' | 'FIXED';
@@ -2195,75 +2195,75 @@ declare class Box3Player {
      * @ignore
      */
     constructor(
-        /**
-         * Sends a private message directly to player
-         * @category chat
-         */
-        directMessage: (message: string) => void,
-        /**
-         * Called whenever player initiates a chat event
-         * @category chat
-         */
-        onChat: Box3EventChannel<Box3ChatEvent>, nextChat: Box3EventFuture<Box3ChatEvent>,
-        /**
-         * Called whenever player presses a button
-         * @category input
-         */
-        onPress: Box3EventChannel<Box3InputEvent>, nextPress: Box3EventFuture<Box3InputEvent>,
-        /**
-         * Called whenever a player releases a buttin
-         * @category input
-         */
-        onRelease: Box3EventChannel<Box3InputEvent>, nextRelease: Box3EventFuture<Box3InputEvent>,
-        /**
-         * @category health
-         */
-        onRespawn: Box3EventChannel<Box3RespawnEvent>, nextRespawn: Box3EventFuture<Box3RespawnEvent>,
-        /**
-         * @category health
-         */
-        forceRespawn: () => void,
-        /**
-         * Opens a dialog for this player
-         * @category dialog
-         */
-        dialog: Box3DialogCall,
-        /**
-         * Cancels any open dialogs for this player
-         * @category dialog
-         */
-        cancelDialogs: () => void,
-        /**
-         * Opens a hyperlink on the client
-         * @category web
-         */
-        link: (href: string) => void,
-        /**
-         * List all wearable objects attached to the player
-         * @param bodyPart is an optional filter to show only wearables attached to a specific body part
-         * @category display
-         */
-        wearables: (bodyPart?: Box3BodyPart) => Box3Wearable[],
-        /**
-         * Attach a new wearable object to the player
-         * @category display
-         */
-        addWearable: (spec: Partial<Box3Wearable>) => Box3Wearable,
-        /**
-         * Remove a wearable object from a player
-         * @param wearable is the wearable to remove
-         * @category display
-         */
-        removeWearable: (wearable: Box3Wearable) => void,
-        /**
-         * Play sound for player
-         * @category sound
-         */
-        sound: (spec: {
-            sample: string;
-            gain?: number;
-            pitch?: number;
-        } | string) => void);
+    /**
+     * Sends a private message directly to player
+     * @category chat
+     */
+    directMessage: (message: string) => void, 
+    /**
+     * Called whenever player initiates a chat event
+     * @category chat
+     */
+    onChat: Box3EventChannel<Box3ChatEvent>, nextChat: Box3EventFuture<Box3ChatEvent>, 
+    /**
+     * Called whenever player presses a button
+     * @category input
+     */
+    onPress: Box3EventChannel<Box3InputEvent>, nextPress: Box3EventFuture<Box3InputEvent>, 
+    /**
+     * Called whenever a player releases a buttin
+     * @category input
+     */
+    onRelease: Box3EventChannel<Box3InputEvent>, nextRelease: Box3EventFuture<Box3InputEvent>, 
+    /**
+     * @category health
+     */
+    onRespawn: Box3EventChannel<Box3RespawnEvent>, nextRespawn: Box3EventFuture<Box3RespawnEvent>, 
+    /**
+     * @category health
+     */
+    forceRespawn: () => void, 
+    /**
+     * Opens a dialog for this player
+     * @category dialog
+     */
+    dialog: Box3DialogCall, 
+    /**
+     * Cancels any open dialogs for this player
+     * @category dialog
+     */
+    cancelDialogs: () => void, 
+    /**
+     * Opens a hyperlink on the client
+     * @category web
+     */
+    link: (href: string) => void, 
+    /**
+     * List all wearable objects attached to the player
+     * @param bodyPart is an optional filter to show only wearables attached to a specific body part
+     * @category display
+     */
+    wearables: (bodyPart?: Box3BodyPart) => Box3Wearable[], 
+    /**
+     * Attach a new wearable object to the player
+     * @category display
+     */
+    addWearable: (spec: Partial<Box3Wearable>) => Box3Wearable, 
+    /**
+     * Remove a wearable object from a player
+     * @param wearable is the wearable to remove
+     * @category display
+     */
+    removeWearable: (wearable: Box3Wearable) => void, 
+    /**
+     * Play sound for player
+     * @category sound
+     */
+    sound: (spec: {
+        sample: string;
+        gain?: number;
+        pitch?: number;
+    } | string) => void);
 }
 /**
  * Result of performing a raycast.  Contains information about the raycast and what it hit.
@@ -2309,42 +2309,42 @@ declare class Box3RaycastResult {
      * @ignore
      */
     constructor(
-        /**
-         * If true, raycast hit an object
-         */
-        hit: boolean,
-        /**
-         * The entity hit by the raycast
-         */
-        hitEntity: Box3Entity | null,
-        /**
-         * The voxel id hit by the raycast (0 if no voxel was hit)
-         */
-        hitVoxel: number,
-        /**
-         * Start point of the ray cast
-         */
-        origin: Box3Vector3,
-        /**
-         * Direction of the raycast
-         */
-        direction: Box3Vector3,
-        /**
-         * Distance traveled along the ray
-         */
-        distance: number,
-        /**
-         * Position of the ray intersection
-         */
-        hitPosition: Box3Vector3,
-        /**
-         * Normal vector on surface at point of intersection
-         */
-        normal: Box3Vector3,
-        /**
-         * If a voxel was hit, the grid coordinates of the hit voxel
-         */
-        voxelIndex: Box3Vector3);
+    /**
+     * If true, raycast hit an object
+     */
+    hit: boolean, 
+    /**
+     * The entity hit by the raycast
+     */
+    hitEntity: Box3Entity | null, 
+    /**
+     * The voxel id hit by the raycast (0 if no voxel was hit)
+     */
+    hitVoxel: number, 
+    /**
+     * Start point of the ray cast
+     */
+    origin: Box3Vector3, 
+    /**
+     * Direction of the raycast
+     */
+    direction: Box3Vector3, 
+    /**
+     * Distance traveled along the ray
+     */
+    distance: number, 
+    /**
+     * Position of the ray intersection
+     */
+    hitPosition: Box3Vector3, 
+    /**
+     * Normal vector on surface at point of intersection
+     */
+    normal: Box3Vector3, 
+    /**
+     * If a voxel was hit, the grid coordinates of the hit voxel
+     */
+    voxelIndex: Box3Vector3);
 }
 /**
  * Configuration parameters passed into a raycast method
@@ -2374,7 +2374,7 @@ interface Box3RaycastOptions {
  *
  * **Example:**
  * ```typescript
- * const token = world.onTick(() => console.log("tick !"));
+ * const token = world.onTick(() => console.log(\"tick !\"));
  * setTimeout(() => {
  *      console.log('cancel tick handler');
  *      token.cancel();
@@ -2435,18 +2435,18 @@ declare class Box3EventHandlerToken {
      * @ignore
      */
     constructor(
-        /**
-         * Cancels the event handler
-         */
-        cancel: () => void,
-        /**
-         * Resumes listening with the event handler
-         */
-        resume: () => void,
-        /**
-         * Checks if the handler is active
-         */
-        active: () => boolean);
+    /**
+     * Cancels the event handler
+     */
+    cancel: () => void, 
+    /**
+     * Resumes listening with the event handler
+     */
+    resume: () => void, 
+    /**
+     * Checks if the handler is active
+     */
+    active: () => boolean);
 }
 /**
  * An event which is fired each tick by {@link Box3.Box3World.onTick}.
@@ -2473,22 +2473,22 @@ declare class Box3TickEvent {
      * @ignore
      */
     constructor(
-        /**
-         * Tick at which the event was fired
-         */
-        tick: number,
-        /**
-         * Last tick which was handled
-         */
-        prevTick: number,
-        /**
-         * If we had to skip any ticks due to the scripts lagging
-         */
-        skip: boolean,
-        /**
-         * Wall clock time between ticks
-         */
-        elapsedTimeMS: number);
+    /**
+     * Tick at which the event was fired
+     */
+    tick: number, 
+    /**
+     * Last tick which was handled
+     */
+    prevTick: number, 
+    /**
+     * If we had to skip any ticks due to the scripts lagging
+     */
+    skip: boolean, 
+    /**
+     * Wall clock time between ticks
+     */
+    elapsedTimeMS: number);
 }
 /**
  * An event which is fired whenever some entity is created or destroyed.
@@ -2508,14 +2508,14 @@ declare class Box3EntityEvent {
      * @ignore
      */
     constructor(
-        /**
-         * The time the event occured
-         */
-        tick: number,
-        /**
-         * The entity that was created/destroyed
-         */
-        entity: Box3Entity);
+    /**
+     * The time the event occured
+     */
+    tick: number, 
+    /**
+     * The entity that was created/destroyed
+     */
+    entity: Box3Entity);
 }
 /**
  * Fired whenever an entity activates or deactivates a trigger
@@ -2534,14 +2534,14 @@ declare class Box3TriggerEvent {
      * @ignore
      */
     constructor(
-        /**
-         * Time event occured
-         */
-        tick: number,
-        /**
-         * Entity which triggered event
-         */
-        entity: Box3Entity);
+    /**
+     * Time event occured
+     */
+    tick: number, 
+    /**
+     * Entity which triggered event
+     */
+    entity: Box3Entity);
 }
 /**
  * Fired whenever an entity takes damage
@@ -2573,26 +2573,26 @@ declare class Box3DamageEvent {
      * @ignore
      */
     constructor(
-        /**
-         * Time event occured
-         */
-        tick: number,
-        /**
-         * Entity which received damage
-         */
-        entity: Box3Entity,
-        /**
-         * Amount of damage
-         */
-        damage: number,
-        /**
-         * Entity attacker
-         */
-        attacker: Box3Entity | null,
-        /**
-         * Damage type
-         */
-        damageType: string);
+    /**
+     * Time event occured
+     */
+    tick: number, 
+    /**
+     * Entity which received damage
+     */
+    entity: Box3Entity, 
+    /**
+     * Amount of damage
+     */
+    damage: number, 
+    /**
+     * Entity attacker
+     */
+    attacker: Box3Entity | null, 
+    /**
+     * Damage type
+     */
+    damageType: string);
 }
 /**
  * Fired whenever an entity takes dies.
@@ -2620,22 +2620,22 @@ declare class Box3DieEvent {
      * @ignore
      */
     constructor(
-        /**
-         * Time event occured
-         */
-        tick: number,
-        /**
-         * Entity which received damage
-         */
-        entity: Box3Entity,
-        /**
-         * Entity attacker
-         */
-        attacker: Box3Entity | null,
-        /**
-         * Damage type
-         */
-        damageType: string);
+    /**
+     * Time event occured
+     */
+    tick: number, 
+    /**
+     * Entity which received damage
+     */
+    entity: Box3Entity, 
+    /**
+     * Entity attacker
+     */
+    attacker: Box3Entity | null, 
+    /**
+     * Damage type
+     */
+    damageType: string);
 }
 /**
  * Triggered whenever a player respawns
@@ -2654,14 +2654,14 @@ declare class Box3RespawnEvent {
      * @ignore
      */
     constructor(
-        /**
-         * Time event occured
-         */
-        tick: number,
-        /**
-         * Entity which received damage
-         */
-        entity: Box3PlayerEntity);
+    /**
+     * Time event occured
+     */
+    tick: number, 
+    /**
+     * Entity which received damage
+     */
+    entity: Box3PlayerEntity);
 }
 /**
  * An event which is fired whenever two entities collide
@@ -2693,26 +2693,26 @@ declare class Box3EntityContactEvent {
      * @ignore
      */
     constructor(
-        /**
-         * Time at which the entities collided
-         */
-        tick: number,
-        /**
-         * The first entity in the pair
-         */
-        entity: Box3Entity,
-        /**
-         * The second entity in the pair
-         */
-        other: Box3Entity,
-        /**
-         * The separating axis of the collision
-         */
-        axis: Box3Vector3,
-        /**
-         * The amount of force imparted by the collision
-         */
-        force: Box3Vector3);
+    /**
+     * Time at which the entities collided
+     */
+    tick: number, 
+    /**
+     * The first entity in the pair
+     */
+    entity: Box3Entity, 
+    /**
+     * The second entity in the pair
+     */
+    other: Box3Entity, 
+    /**
+     * The separating axis of the collision
+     */
+    axis: Box3Vector3, 
+    /**
+     * The amount of force imparted by the collision
+     */
+    force: Box3Vector3);
 }
 /**
  * An event which is fired whenever an entity comes into contact with terrain
@@ -2756,38 +2756,38 @@ declare class Box3VoxelContactEvent {
      * @ignore
      */
     constructor(
-        /**
-         * The time of the contact event
-         */
-        tick: number,
-        /**
-         * The entity which touched the terrain
-         */
-        entity: Box3Entity,
-        /**
-         * x coordinate of voxel which was touched
-         */
-        x: number,
-        /**
-         * y coordinate of voxel which was touched
-         */
-        y: number,
-        /**
-         * z coordinate of voxel which was touched
-         */
-        z: number,
-        /**
-         * id of voxel
-         */
-        voxel: number,
-        /**
-         * Separating axis
-         */
-        axis: Box3Vector3,
-        /**
-         * Collision force
-         */
-        force: Box3Vector3);
+    /**
+     * The time of the contact event
+     */
+    tick: number, 
+    /**
+     * The entity which touched the terrain
+     */
+    entity: Box3Entity, 
+    /**
+     * x coordinate of voxel which was touched
+     */
+    x: number, 
+    /**
+     * y coordinate of voxel which was touched
+     */
+    y: number, 
+    /**
+     * z coordinate of voxel which was touched
+     */
+    z: number, 
+    /**
+     * id of voxel
+     */
+    voxel: number, 
+    /**
+     * Separating axis
+     */
+    axis: Box3Vector3, 
+    /**
+     * Collision force
+     */
+    force: Box3Vector3);
 }
 /**
  * An event which is fired whenever an entity enters or leaves a fluid
@@ -2811,18 +2811,18 @@ declare class Box3FluidContactEvent {
      * @ignore
      */
     constructor(
-        /**
-         * Time event occured
-         */
-        tick: number,
-        /**
-         * Entity which modified
-         */
-        entity: Box3Entity,
-        /**
-         * The id of the fluid voxel
-         */
-        voxel: number);
+    /**
+     * Time event occured
+     */
+    tick: number, 
+    /**
+     * Entity which modified
+     */
+    entity: Box3Entity, 
+    /**
+     * The id of the fluid voxel
+     */
+    voxel: number);
 }
 /**
  * Triggered by {@link Box3.Box3World.onChat} and {@link Box3.Box3Entity.onChat}
@@ -2845,21 +2845,21 @@ declare class Box3ChatEvent {
      * @ignore
      */
     constructor(
-        /**
-         * Time chat event occured
-         */
-        tick: number,
-        /**
-         * Entity which initiated chat event
-         */
-        entity: Box3Entity,
-        /**
-         * What the entity said in the chat event
-         */
-        message: string);
+    /**
+     * Time chat event occured
+     */
+    tick: number, 
+    /**
+     * Entity which initiated chat event
+     */
+    entity: Box3Entity, 
+    /**
+     * What the entity said in the chat event
+     */
+    message: string);
 }
 /**
- * Triggered by {@link Box3.Box3World.onInteract} and {@link Box3.Box3Entity.onInteract}
+* Triggered by {@link Box3.Box3World.onInteract} and {@link Box3.Box3Entity.onInteract}
  * @category events
  */
 declare class Box3InteractEvent {
@@ -2879,32 +2879,32 @@ declare class Box3InteractEvent {
      * @ignore
      */
     constructor(
-        /**
-         * Time of event
-         */
-        tick: number,
-        /**
-         * Entity initiating interaction
-         */
-        entity: Box3PlayerEntity,
-        /**
-         * Entity which received interaction
-         */
-        targetEntity: Box3Entity);
+    /**
+     * Time of event
+     */
+    tick: number, 
+    /**
+     * Entity initiating interaction
+     */
+    entity: Box3PlayerEntity, 
+    /**
+     * Entity which received interaction
+     */
+    targetEntity: Box3Entity);
 }
 /**
  * Type of a button pressed by a player
  * @category events
  */
 declare enum Box3ButtonType {
-    WALK = "walk",
-    RUN = "run",
-    CROUCH = "crouch",
-    JUMP = "jump",
-    DOUBLE_JUMP = "jump2",
-    FLY = "fly",
-    ACTION0 = "action0",
-    ACTION1 = "action1"
+    WALK = \"walk\",
+    RUN = \"run\",
+    CROUCH = \"crouch\",
+    JUMP = \"jump\",
+    DOUBLE_JUMP = \"jump2\",
+    FLY = \"fly\",
+    ACTION0 = \"action0\",
+    ACTION1 = \"action1\"
 }
 /**
  * Input events are generated whenever a player presses a button.
@@ -2941,30 +2941,30 @@ declare class Box3InputEvent {
      * @ignore
      */
     constructor(
-        /**
-         * The time the button was pressed
-         */
-        tick: number,
-        /**
-         * A reference to the player which pressed the button
-         */
-        entity: Box3PlayerEntity,
-        /**
-         * The position of the entity at the time the pressed the button
-         */
-        position: Box3Vector3,
-        /**
-         * The button which was input by the player
-         */
-        button: Box3ButtonType,
-        /**
-         * If true, then this is a press event.  Otherwise if false this is a release event
-         */
-        pressed: boolean,
-        /**
-         * The result of a raycast query initiated by the player at the exact instant they pressed the button from the perspective of their camera.
-         */
-        raycast: Box3RaycastResult);
+    /**
+     * The time the button was pressed
+     */
+    tick: number, 
+    /**
+     * A reference to the player which pressed the button
+     */
+    entity: Box3PlayerEntity, 
+    /**
+     * The position of the entity at the time the pressed the button
+     */
+    position: Box3Vector3, 
+    /**
+     * The button which was input by the player
+     */
+    button: Box3ButtonType, 
+    /**
+     * If true, then this is a press event.  Otherwise if false this is a release event
+     */
+    pressed: boolean, 
+    /**
+     * The result of a raycast query initiated by the player at the exact instant they pressed the button from the perspective of their camera.
+     */
+    raycast: Box3RaycastResult);
 }
 declare class Box3ClickEvent {
     /**
@@ -2999,34 +2999,34 @@ declare class Box3ClickEvent {
      * @ignore
      */
     constructor(
-        /**
-         * Tick that click event occurred
-         */
-        tick: number,
-        /**
-         * Entity that got clicked
-         */
-        entity: Box3Entity,
-        /**
-         * Entity which initiated the click event
-         */
-        clicker: Box3PlayerEntity,
-        /**
-         * Button which was pressed ACTION0 = LeftClick, ACTION1 = RightClick
-         */
-        button: Box3ButtonType.ACTION0 | Box3ButtonType.ACTION1,
-        /**
-         * Distance from clicker to entity
-         */
-        distance: number,
-        /**
-         * Position of clicker at time of click
-         */
-        clickerPosition: Box3Vector3,
-        /**
-         * Raycast from clicker -> entity
-         */
-        raycast: Box3RaycastResult);
+    /**
+     * Tick that click event occurred
+     */
+    tick: number, 
+    /**
+     * Entity that got clicked
+     */
+    entity: Box3Entity, 
+    /**
+     * Entity which initiated the click event
+     */
+    clicker: Box3PlayerEntity, 
+    /**
+     * Button which was pressed ACTION0 = LeftClick, ACTION1 = RightClick
+     */
+    button: Box3ButtonType.ACTION0 | Box3ButtonType.ACTION1, 
+    /**
+     * Distance from clicker to entity
+     */
+    distance: number, 
+    /**
+     * Position of clicker at time of click
+     */
+    clickerPosition: Box3Vector3, 
+    /**
+     * Raycast from clicker -> entity
+     */
+    raycast: Box3RaycastResult);
 }
 /**
  * Selectors are a powerful syntax for searching all of the objects in a game.  The interface for selectors in box3 is modeled after the DOM APIs.
@@ -3034,8 +3034,8 @@ declare class Box3ClickEvent {
  * * ```javascript
  * const entities = world.querySelector('*');           // all entities in the world
  * const players = world.querySelectorAll('player');    // all players in the game
- * const theChair = world.querySelector('#chair');      // the first entity whose id is "chair"
- * const boxes = world.querySelectorAll('.box');        // all entities tagged with "box"
+ * const theChair = world.querySelector('#chair');      // the first entity whose id is \"chair\"
+ * const boxes = world.querySelectorAll('.box');        // all entities tagged with \"box\"
  * const boxChair = world.querySelector('.box .red');
  * ```
  */
@@ -3051,13 +3051,13 @@ declare class Box3ResourceSystem {
  * Describes the type of an asset
  */
 declare enum Box3AssetType {
-    VOXEL_MESH = "mesh",
-    DIRECTORY = "directory",
-    COLOR_LUT = "lut",
-    JS_SCRIPT = "js",
-    IMAGE = "image",
-    PARTICLE_TEXTURE = "snow",
-    SOUND = "sound"
+    VOXEL_MESH = \"mesh\",
+    DIRECTORY = \"directory\",
+    COLOR_LUT = \"lut\",
+    JS_SCRIPT = \"js\",
+    IMAGE = \"image\",
+    PARTICLE_TEXTURE = \"snow\",
+    SOUND = \"sound\"
 }
 /**
  * An entry from an asset list
@@ -3075,14 +3075,14 @@ declare class Box3AssetListEntry {
      * @ignore
      */
     constructor(
-        /**
-         * Fully qualified path of asset, split by directory
-         */
-        path: string,
-        /**
-         * Type of asset
-         */
-        type: Box3AssetType);
+    /**
+     * Fully qualified path of asset, split by directory
+     */
+    path: string, 
+    /**
+     * Type of asset
+     */
+    type: Box3AssetType);
 }
 /**
  * A standard SQL database
@@ -3096,10 +3096,10 @@ declare class Box3Database {
      * @ignore
      */
     constructor(
-        /**
-         * Executes a SQL query on this database
-         */
-        sql: (sql: string[], ...params: (number | string | Uint8Array | boolean | null)[]) => Box3QueryResult);
+    /**
+     * Executes a SQL query on this database
+     */
+    sql: (sql: string[], ...params: (number | string | Uint8Array | boolean | null)[]) => Box3QueryResult);
 }
 /**
  * Query result api
@@ -3141,6 +3141,7 @@ declare const console:{
     debug:Box3LoggerMethod;
     error:Box3LoggerMethod;
     warn:Box3LoggerMethod;
+    clear:Box3LoggerMethod;
 };
 
 declare const world:Box3World;
@@ -3185,16 +3186,16 @@ declare class Box3HttpAPI {
     constructor(url: string, fetch: (url: string, params?: Box3HttpFetchParams) => Promise<Box3HttpFetchResponse>, onRequest: (handler: Box3HttpHandler) => void);
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -3270,16 +3271,16 @@ interface WeakSetConstructor {
 }
 declare var WeakSet: WeakSetConstructor;
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -3635,11 +3636,11 @@ interface RegExp {
      * Returns a string indicating the flags of the regular expression in question. This field is read-only.
      * The characters in this string are sequenced and concatenated in the following order:
      *
-     *    - "g" for global
-     *    - "i" for ignoreCase
-     *    - "m" for multiline
-     *    - "u" for unicode
-     *    - "y" for sticky
+     *    - \"g\" for global
+     *    - \"i\" for ignoreCase
+     *    - \"m\" for multiline
+     *    - \"u\" for unicode
+     *    - \"y\" for sticky
      *
      * If no flags are set, the value is the empty string.
      */
@@ -3692,16 +3693,16 @@ interface String {
     /**
      * Returns the String value result of normalizing the string into the normalization form
      * named by form as specified in Unicode Standard Annex #15, Unicode Normalization Forms.
-     * @param form Applicable values: "NFC", "NFD", "NFKC", or "NFKD", If not specified default
-     * is "NFC"
+     * @param form Applicable values: \"NFC\", \"NFD\", \"NFKC\", or \"NFKD\", If not specified default
+     * is \"NFC\"
      */
-    normalize(form: "NFC" | "NFD" | "NFKC" | "NFKD"): string;
+    normalize(form: \"NFC\" | \"NFD\" | \"NFKC\" | \"NFKD\"): string;
 
     /**
      * Returns the String value result of normalizing the string into the normalization form
      * named by form as specified in Unicode Standard Annex #15, Unicode Normalization Forms.
-     * @param form Applicable values: "NFC", "NFD", "NFKC", or "NFKD", If not specified default
-     * is "NFC"
+     * @param form Applicable values: \"NFC\", \"NFD\", \"NFKC\", or \"NFKD\", If not specified default
+     * is \"NFC\"
      */
     normalize(form?: string): string;
 
@@ -3782,16 +3783,16 @@ interface StringConstructor {
     raw(template: TemplateStringsArray, ...substitutions: any[]): string;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -3854,16 +3855,16 @@ interface GeneratorFunctionConstructor {
     readonly prototype: GeneratorFunction;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -4348,16 +4349,16 @@ interface Float64ArrayConstructor {
     from(arrayLike: Iterable<number>, mapfn?: (v: number, k: number) => number, thisArg?: any): Float64Array;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -4495,16 +4496,16 @@ interface PromiseConstructor {
 
 declare var Promise: PromiseConstructor;
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -4532,16 +4533,16 @@ interface ProxyConstructor {
 }
 declare var Proxy: ProxyConstructor;
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -4562,16 +4563,16 @@ declare namespace Reflect {
     function setPrototypeOf(target: object, proto: any): boolean;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -4604,16 +4605,16 @@ interface SymbolConstructor {
 }
 
 declare var Symbol: SymbolConstructor;/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -4704,22 +4705,22 @@ interface Date {
     /**
      * Converts a Date object to a string.
      */
-    [Symbol.toPrimitive](hint: "default"): string;
+    [Symbol.toPrimitive](hint: \"default\"): string;
     /**
      * Converts a Date object to a string.
      */
-    [Symbol.toPrimitive](hint: "string"): string;
+    [Symbol.toPrimitive](hint: \"string\"): string;
     /**
      * Converts a Date object to a number.
      */
-    [Symbol.toPrimitive](hint: "number"): number;
+    [Symbol.toPrimitive](hint: \"number\"): number;
     /**
      * Converts a Date object to a string or number.
      *
-     * @param hint The strings "number", "string", or "default" to specify what primitive to return.
+     * @param hint The strings \"number\", \"string\", or \"default\" to specify what primitive to return.
      *
-     * @throws {TypeError} If 'hint' was given something other than "number", "string", or "default".
-     * @returns A number if 'hint' was "number", a string if 'hint' was "string" or "default".
+     * @throws {TypeError} If 'hint' was given something other than \"number\", \"string\", or \"default\".
+     * @returns A number if 'hint' was \"number\", a string if 'hint' was \"string\" or \"default\".
      */
     [Symbol.toPrimitive](hint: string): string | number;
 }
@@ -4867,39 +4868,39 @@ interface DataView {
 }
 
 interface Int8Array {
-    readonly [Symbol.toStringTag]: "Int8Array";
+    readonly [Symbol.toStringTag]: \"Int8Array\";
 }
 
 interface Uint8Array {
-    readonly [Symbol.toStringTag]: "UInt8Array";
+    readonly [Symbol.toStringTag]: \"UInt8Array\";
 }
 
 interface Uint8ClampedArray {
-    readonly [Symbol.toStringTag]: "Uint8ClampedArray";
+    readonly [Symbol.toStringTag]: \"Uint8ClampedArray\";
 }
 
 interface Int16Array {
-    readonly [Symbol.toStringTag]: "Int16Array";
+    readonly [Symbol.toStringTag]: \"Int16Array\";
 }
 
 interface Uint16Array {
-    readonly [Symbol.toStringTag]: "Uint16Array";
+    readonly [Symbol.toStringTag]: \"Uint16Array\";
 }
 
 interface Int32Array {
-    readonly [Symbol.toStringTag]: "Int32Array";
+    readonly [Symbol.toStringTag]: \"Int32Array\";
 }
 
 interface Uint32Array {
-    readonly [Symbol.toStringTag]: "Uint32Array";
+    readonly [Symbol.toStringTag]: \"Uint32Array\";
 }
 
 interface Float32Array {
-    readonly [Symbol.toStringTag]: "Float32Array";
+    readonly [Symbol.toStringTag]: \"Float32Array\";
 }
 
 interface Float64Array {
-    readonly [Symbol.toStringTag]: "Float64Array";
+    readonly [Symbol.toStringTag]: \"Float64Array\";
 }
 
 interface ArrayConstructor {
@@ -4914,16 +4915,16 @@ interface SetConstructor {
 interface ArrayBufferConstructor {
     readonly [Symbol.species]: ArrayBufferConstructor;
 }/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5026,22 +5027,22 @@ interface Float64Array {
      */
     includes(searchElement: number, fromIndex?: number): boolean;
 }/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
 
 declare namespace Intl {
-    type DateTimeFormatPartTypes = "day" | "dayPeriod" | "era" | "hour" | "literal" | "minute" | "month" | "second" | "timeZoneName" | "weekday" | "year";
+    type DateTimeFormatPartTypes = \"day\" | \"dayPeriod\" | \"era\" | \"hour\" | \"literal\" | \"minute\" | \"month\" | \"second\" | \"timeZoneName\" | \"weekday\" | \"year\";
 
     interface DateTimeFormatPart {
         type: DateTimeFormatPartTypes;
@@ -5053,16 +5054,16 @@ declare namespace Intl {
     }
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5099,16 +5100,16 @@ interface ObjectConstructor {
     getOwnPropertyDescriptors<T>(o: T): {[P in keyof T]: TypedPropertyDescriptor<T[P]>} & { [x: string]: PropertyDescriptor };
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5128,7 +5129,7 @@ interface SharedArrayBuffer {
      */
     slice(begin: number, end?: number): SharedArrayBuffer;
     readonly [Symbol.species]: SharedArrayBuffer;
-    readonly [Symbol.toStringTag]: "SharedArrayBuffer";
+    readonly [Symbol.toStringTag]: \"SharedArrayBuffer\";
 }
 
 interface SharedArrayBufferConstructor {
@@ -5206,10 +5207,10 @@ interface Atomics {
     /**
      * If the value at the given position in the array is equal to the provided value, the current
      * agent is put to sleep causing execution to suspend until the timeout expires (returning
-     * `"timed-out"`) or until the agent is awoken (returning `"ok"`); otherwise, returns
-     * `"not-equal"`.
+     * `\"timed-out\"`) or until the agent is awoken (returning `\"ok\"`); otherwise, returns
+     * `\"not-equal\"`.
      */
-    wait(typedArray: Int32Array, index: number, value: number, timeout?: number): "ok" | "not-equal" | "timed-out";
+    wait(typedArray: Int32Array, index: number, value: number, timeout?: number): \"ok\" | \"not-equal\" | \"timed-out\";
 
     /**
      * Wakes up sleeping agents that are waiting on the given index of the array, returning the
@@ -5224,21 +5225,21 @@ interface Atomics {
      */
     xor(typedArray: Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array, index: number, value: number): number;
 
-    readonly [Symbol.toStringTag]: "Atomics";
+    readonly [Symbol.toStringTag]: \"Atomics\";
 }
 
 declare var Atomics: Atomics;
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5253,7 +5254,7 @@ interface String {
      *
      * @param fillString The string to pad the current string with.
      *        If this string is too long, it will be truncated and the left-most part will be applied.
-     *        The default value for this parameter is " " (U+0020).
+     *        The default value for this parameter is \" \" (U+0020).
      */
     padStart(maxLength: number, fillString?: string): string;
 
@@ -5266,21 +5267,21 @@ interface String {
      *
      * @param fillString The string to pad the current string with.
      *        If this string is too long, it will be truncated and the left-most part will be applied.
-     *        The default value for this parameter is " " (U+0020).
+     *        The default value for this parameter is \" \" (U+0020).
      */
     padEnd(maxLength: number, fillString?: string): string;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5321,16 +5322,16 @@ interface Float64ArrayConstructor {
     new (): Float64Array;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5393,16 +5394,16 @@ interface AsyncGeneratorFunctionConstructor {
     readonly prototype: AsyncGeneratorFunction;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5429,30 +5430,30 @@ interface AsyncIterable<T> {
 interface AsyncIterableIterator<T> extends AsyncIterator<T> {
     [Symbol.asyncIterator](): AsyncIterableIterator<T>;
 }/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
 
 declare namespace Intl {
     interface PluralRulesOptions {
-        localeMatcher?: "lookup" | "best fit";
-        type?: "cardinal" | "ordinal";
+        localeMatcher?: \"lookup\" | \"best fit\";
+        type?: \"cardinal\" | \"ordinal\";
     }
 
     interface ResolvedPluralRulesOptions {
         locale: string;
         pluralCategories: string[];
-        type: "cardinal" | "ordinal";
+        type: \"cardinal\" | \"ordinal\";
         minimumIntegerDigits: number;
         minimumFractionDigits: number;
         maximumFractionDigits: number;
@@ -5475,16 +5476,16 @@ declare namespace Intl {
     };
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5502,16 +5503,16 @@ interface Promise<T> {
     finally(onfinally?: (() => void) | undefined | null): Promise<T>
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5535,16 +5536,16 @@ interface RegExp {
      */
     readonly dotAll: boolean;
 }/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5574,47 +5575,27 @@ interface ReadonlyArray<T> {
      * @param depth The maximum recursion depth
      */
     flat<U>(this:
-                ReadonlyArray<U[][][][]> |
+        ReadonlyArray<U[][][][]> |
 
-                ReadonlyArray<ReadonlyArray<U[][][]>> |
-                ReadonlyArray<ReadonlyArray<U[][]>[]> |
-                ReadonlyArray<ReadonlyArray<U[]>[][]> |
-                ReadonlyArray<ReadonlyArray<U>[][][]> |
+        ReadonlyArray<ReadonlyArray<U[][][]>> |
+        ReadonlyArray<ReadonlyArray<U[][]>[]> |
+        ReadonlyArray<ReadonlyArray<U[]>[][]> |
+        ReadonlyArray<ReadonlyArray<U>[][][]> |
 
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<U[][]>>> |
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<U>[][]>> |
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>[][]> |
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<U>[]>[]> |
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<U[]>>[]> |
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<U[]>[]>> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<U[][]>>> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<U>[][]>> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>[][]> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<U>[]>[]> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<U[]>>[]> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<U[]>[]>> |
 
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U[]>>>> |
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U>[]>>> |
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>[]>> |
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>>[]> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U[]>>>> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U>[]>>> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>[]>> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>>[]> |
 
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>>>>,
-            depth: 4): U[];
-
-    /**
-     * Returns a new array with all sub-array elements concatenated into it recursively up to the
-     * specified depth.
-     *
-     * @param depth The maximum recursion depth
-     */
-    flat<U>(this:
-                ReadonlyArray<U[][][]> |
-
-                ReadonlyArray<ReadonlyArray<U>[][]> |
-                ReadonlyArray<ReadonlyArray<U[]>[]> |
-                ReadonlyArray<ReadonlyArray<U[][]>> |
-
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<U[]>>> |
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<U>[]>> |
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>[]> |
-
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>>>,
-            depth: 3): U[];
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>>>>,
+        depth: 4): U[];
 
     /**
      * Returns a new array with all sub-array elements concatenated into it recursively up to the
@@ -5623,13 +5604,18 @@ interface ReadonlyArray<T> {
      * @param depth The maximum recursion depth
      */
     flat<U>(this:
-                ReadonlyArray<U[][]> |
+        ReadonlyArray<U[][][]> |
 
-                ReadonlyArray<ReadonlyArray<U[]>> |
-                ReadonlyArray<ReadonlyArray<U>[]> |
+        ReadonlyArray<ReadonlyArray<U>[][]> |
+        ReadonlyArray<ReadonlyArray<U[]>[]> |
+        ReadonlyArray<ReadonlyArray<U[][]>> |
 
-                ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>>,
-            depth: 2): U[];
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<U[]>>> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<U>[]>> |
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>[]> |
+
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>>>,
+        depth: 3): U[];
 
     /**
      * Returns a new array with all sub-array elements concatenated into it recursively up to the
@@ -5638,9 +5624,24 @@ interface ReadonlyArray<T> {
      * @param depth The maximum recursion depth
      */
     flat<U>(this:
-                ReadonlyArray<U[]> |
-                ReadonlyArray<ReadonlyArray<U>>,
-            depth?: 1
+        ReadonlyArray<U[][]> |
+
+        ReadonlyArray<ReadonlyArray<U[]>> |
+        ReadonlyArray<ReadonlyArray<U>[]> |
+
+        ReadonlyArray<ReadonlyArray<ReadonlyArray<U>>>,
+        depth: 2): U[];
+
+    /**
+     * Returns a new array with all sub-array elements concatenated into it recursively up to the
+     * specified depth.
+     *
+     * @param depth The maximum recursion depth
+     */
+    flat<U>(this:
+        ReadonlyArray<U[]> |
+        ReadonlyArray<ReadonlyArray<U>>,
+        depth?: 1
     ): U[];
 
     /**
@@ -5650,8 +5651,8 @@ interface ReadonlyArray<T> {
      * @param depth The maximum recursion depth
      */
     flat<U>(this:
-                ReadonlyArray<U>,
-            depth: 0
+        ReadonlyArray<U>,
+        depth: 0
     ): U[];
 
     /**
@@ -5753,16 +5754,16 @@ interface Array<T> {
     flat<U>(depth?: number): any[];
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5781,16 +5782,16 @@ interface ObjectConstructor {
     fromEntries(entries: Iterable<readonly any[]>): any;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5810,16 +5811,16 @@ interface String {
     trimRight(): string;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5831,16 +5832,16 @@ interface Symbol {
     readonly description: string | undefined;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -5858,7 +5859,7 @@ interface BigInt {
     /** Returns the primitive value of the specified object. */
     valueOf(): bigint;
 
-    readonly [Symbol.toStringTag]: "BigInt";
+    readonly [Symbol.toStringTag]: \"BigInt\";
 }
 
 interface BigIntConstructor {
@@ -6120,7 +6121,7 @@ interface BigInt64Array {
 
     [Symbol.iterator](): IterableIterator<bigint>;
 
-    readonly [Symbol.toStringTag]: "BigInt64Array";
+    readonly [Symbol.toStringTag]: \"BigInt64Array\";
 
     [index: number]: bigint;
 }
@@ -6389,7 +6390,7 @@ interface BigUint64Array {
 
     [Symbol.iterator](): IterableIterator<bigint>;
 
-    readonly [Symbol.toStringTag]: "BigUint64Array";
+    readonly [Symbol.toStringTag]: \"BigUint64Array\";
 
     [index: number]: bigint;
 }
@@ -6455,28 +6456,28 @@ interface DataView {
     setBigUint64(byteOffset: number, value: bigint, littleEndian?: boolean): void;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
 
 
 interface PromiseFulfilledResult<T> {
-    status: "fulfilled";
+    status: \"fulfilled\";
     value: T;
 }
 
 interface PromiseRejectedResult {
-    status: "rejected";
+    status: \"rejected\";
     reason: any;
 }
 
@@ -6501,16 +6502,16 @@ interface PromiseConstructor {
     allSettled<T>(values: Iterable<T>): Promise<PromiseSettledResult<T extends PromiseLike<infer U> ? U : T>[]>;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -6524,16 +6525,16 @@ interface String {
     matchAll(regexp: RegExp): IterableIterator<RegExpMatchArray>;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
@@ -6555,16 +6556,16 @@ interface RegExp {
     [Symbol.matchAll](str: string): IterableIterator<RegExpMatchArray>;
 }
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+Copyright (c) Microsoft Corporation. All rights reserved. 
+Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
+License at http://www.apache.org/licenses/LICENSE-2.0  
+ 
 THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
 KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABLITY OR NON-INFRINGEMENT. 
+ 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
